@@ -15,11 +15,9 @@ import { SharedModule } from './shared/shared.module';
 import { HeaderComponent } from './pages/header/header.component';
 import * as AllIcons from '@ant-design/icons-angular/icons';
 import { IconDefinition } from '@ant-design/icons-angular';
+import { NZ_ICONS } from 'ng-zorro-antd/icon';
 import { RegisterComponent } from './pages/register/register.component';
 import { HomeComponent } from './pages/home/home.component';
-import { ContactComponent } from './pages/contact/contact.component';
-import { AiChatComponent } from './shared/components/ai-chat/ai-chat.component';
-import { CarDetailsComponent } from './pages/car-details/car-details.component';
 
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
@@ -29,16 +27,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
 );
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    HomeComponent,
-    HeaderComponent,
-    ContactComponent,
-    AiChatComponent,
-    CarDetailsComponent
-  ],
+  declarations: [AppComponent, LoginComponent, RegisterComponent, HomeComponent],
   providers: [
     provideNzIcons(),
     provideNzI18n(en_US),
@@ -53,6 +42,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     BrowserAnimationsModule,
     SharedModule,
     ReactiveFormsModule,
+    HeaderComponent,
   ],
 })
 export class AppModule {}
