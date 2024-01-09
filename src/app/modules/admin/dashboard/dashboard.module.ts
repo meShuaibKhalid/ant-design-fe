@@ -3,7 +3,14 @@ import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../../../shared/shared.module';
-import { WelcomeComponent } from '../../../pages/welcome/welcome.component';
+import { WelcomeComponent } from '../welcome/welcome.component';
+import { UserListComponent } from '../user-list/user-list.component';
+import { CarListingsComponent } from '../car-listings/car-listings.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HomeComponent } from '../../../pages/home/home.component';
+import { CarDetailsComponent } from '../../../pages/car-details/car-details.component';
+import { ContactComponent } from '../../../pages/contact/contact.component';
+import { AiChatComponent } from '../../../shared/components/ai-chat/ai-chat.component';
 
 const routes: Routes = [
   {
@@ -12,19 +19,44 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: WelcomeComponent
+        component: WelcomeComponent,
+      },
+      {
+        path: 'users',
+        component: UserListComponent,
+      },
+      {
+        path: 'cars',
+        component: CarListingsComponent,
+      },
+      {
+        path: 'home',
+        component: HomeComponent,
+      },
+      {
+        path: 'contact',
+        component: ContactComponent,
+      },
+      {
+        path: 'chat',
+        component: AiChatComponent,
+      },
+      {
+        path: 'car-details/:id',
+        component: CarDetailsComponent
       }
-    ]
-  }
-]
+    ],
+  },
+];
 
 @NgModule({
-  declarations: [DashboardComponent],
-  imports: [
-    CommonModule,
-    SharedModule,
-    RouterModule.forChild(routes)
+  declarations: [
+    DashboardComponent,
+    WelcomeComponent,
+    UserListComponent,
+    CarListingsComponent,
   ],
-  exports: [RouterModule]
+  imports: [CommonModule, SharedModule, RouterModule.forChild(routes), ReactiveFormsModule],
+  exports: [RouterModule],
 })
-export class DashboardModule { }
+export class DashboardModule {}

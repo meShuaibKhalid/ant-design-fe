@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { StoreService } from '../../../shared/services/store.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,11 +10,19 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent {
   isCollapsed = false;
+  user:any;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private store: StoreService) {
+    this.store.state.pipe(
+      tap(({ user }) => {
+        this.user = user;
+      })
+    );
+   }
 
   logout() {
     localStorage.clear();
+    this.store.reset();
     this.router.navigate(['/login']);
   }
 }

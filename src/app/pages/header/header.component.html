@@ -28,15 +28,15 @@
             <li class="flex items-center">
                 <a class="font-medium" routerLink="/chat">ChatUI</a>
             </li>
-            <li class="flex items-center">
+            <li class="flex items-center" *ngIf="!user?.name">
                 <a class="font-medium" routerLink="/login">Login</a>
             </li>
-            <li class="flex items-center">
+            <li class="flex items-center" *ngIf="!user?.name">
                 <a class="font-medium" routerLink="/register">Register</a>
             </li>
         </ul>
         <div class="flex items-center gap-2 ml-3 cursor-pointer" nz-dropdown [nzDropdownMenu]="menu">
-            <a class="font-semibold">{{username}}</a>
+            <a class="font-semibold">{{user?.name}}</a>
             <button nz-button nzShape="circle"><span nz-icon nzType="user"></span></button>
         </div>
     </div>
@@ -44,6 +44,6 @@
 <nz-dropdown-menu #menu="nzDropdownMenu">
     <ul nz-menu nzSelectable>
         <li nz-menu-item>Profile</li>
-        <li nz-menu-item routerLink="/login">Logout</li>
+        <li nz-menu-item (click)="logout()">Logout</li>
     </ul>
 </nz-dropdown-menu>

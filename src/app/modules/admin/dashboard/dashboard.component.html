@@ -7,10 +7,10 @@
         <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
             <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
                 <ul>
-                    <li nz-menu-item nzMatchRouter>
+                    <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="/dashboard">
                         <a>Welcome</a>
                     </li>
-                    <li nz-menu-item nzMatchRouter>
+                    <li nz-menu-item nzMatchRouter routerLink="/dashboard/users">
                         <a>Users</a>
                     </li>
                 </ul>

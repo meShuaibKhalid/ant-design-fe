@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { ApiService } from '../../shared/services/api.service';
 import { AlertService } from '../../shared/services/alert.service';
+import { StoreService } from '../../shared/services/store.service';
 
 @Component({
   selector: 'app-login',
@@ -29,11 +30,10 @@ export class LoginComponent {
     if (this.validateForm.valid) {
       this.api.login(this.validateForm.value).subscribe((res: any) => {
         if (res) {
-          console.log('res: ', res);
-          this.alert.success('Login successful')
-          localStorage.setItem('token', 'true');
+          this.alert.success('Login successful');
+          localStorage.setItem('user', JSON.stringify(res));
+          this.store.setState({ user: res });
           if (res.role === 'admin') {
-            localStorage.setItem('admin', 'true');
             this.router.navigate(['/dashboard']);
           } else {
             this.router.navigate(['/home']);
@@ -56,6 +56,7 @@ export class LoginComponent {
     private fb: NonNullableFormBuilder,
     private router: Router,
     private api: ApiService,
-    private alert: AlertService
+    private alert: AlertService,
+    private store: StoreService
   ) {}
 }
