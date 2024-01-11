@@ -1,0 +1,175 @@
+.detail-wrap {
+  .condition {
+    h5 {
+      color: #6f6d70;
+      font-weight: 500;
+    }
+  }
+
+  .title {
+    h3 {
+      color: #46465d;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+  }
+
+  .disc {
+    p {
+      color: #6f6d70;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+  }
+
+  // style prices
+  .wrap-price {
+    .price {
+      h4 {
+        color: #2c2b4d;
+        font-weight: 900;
+      }
+
+      p {
+        color: #6f6d70;
+        font-weight: 700;
+        font-size: 12px;
+        white-space: nowrap;
+
+        span {
+          font-size: 18px;
+          color: #2c2b4d;
+        }
+      }
+    }
+
+    .wrap-car-price {
+      h5 {
+        color: #6f6d70;
+        font-weight: 700;
+      }
+    }
+
+    .wrap-seller-fee {
+      h5 {
+        color: #6f6d70;
+        font-weight: 700;
+        align-items: center;
+        display: flex;
+
+        span {
+          font-size: 16px;
+          color: #2c2b4d;
+        }
+      }
+    }
+
+    .wrap-Tprice {
+      h5 {
+        color: #6f6d70;
+        font-weight: 700;
+      }
+      .price {
+        color: #000;
+        font-weight: 900;
+      }
+    }
+    .wrap-Mprice {
+      h5 {
+        color: #6f6d70;
+        font-weight: 700;
+      }
+      .m-price {
+        color: #5c60bc;
+        font-weight: 600;
+        align-items: center;
+        display: flex;
+
+        span {
+          font-size: 16px;
+          color: #5c60bc;
+        }
+      }
+    }
+  }
+  // style prices End
+} // style overview section
+.overview-container {
+  .heading {
+    color: #46465d;
+    font-weight: 700;
+  }
+  .disc {
+    p {
+      color: #6f6d70;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+  }
+  .wrap-feature {
+    .text-feature {
+      color: #5c60bc;
+      font-weight: 600;
+      align-items: center;
+      display: flex;
+      span {
+        font-size: 18px;
+        color: #5c60bc;
+      }
+    }
+  }
+  // style miles
+  .container-miles {
+    .icon {
+      span {
+        font-size: 18px;
+        color: #5c60bc;
+      }
+    }
+    .wrap-miles {
+      p {
+        color: #6f6d70;
+        font-weight: 700;
+        align-items: center;
+        display: flex;
+        span {
+          font-size: 18px;
+          color: #2c2b4d;
+        }
+      }
+      p.text-miles {
+        color: #46465d;
+        font-weight: 700;
+      }
+    }
+  }
+  // style icons feature
+  .icons-container {
+    .icon {
+      span {
+        font-size: 18px;
+        color: #6f6d70;
+      }
+    }
+
+    .text-features {
+      color: #000;
+      font-weight: 500;
+      margin-bottom: 0;
+    }
+  }
+}
+[nz-carousel-content] {
+  text-align: center;
+  height: 160px;
+  line-height: 160px;
+  background: #364d79;
+  color: #fff;
+  overflow: hidden;
+}
+
+h3 {
+  color: #fff;
+  margin-bottom: 0;
+  user-select: none;
+}

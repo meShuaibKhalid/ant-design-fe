@@ -1,0 +1,18 @@
+<div class="flex flex-col pt-4 container mx-auto ">
+   <div class="chat-wrapper bg-white">
+      <div class="chat-container">
+         @for (item of chat; track $index) {
+         <div [class]="item.type === 'sender' ? 'send' : 'recieve' ">
+            <span>
+               {{item.text}}
+            </span>
+         </div>
+         }
+      </div>
+      <div class="controls">
+         <textarea class="w-full" nz-input [formControl]="message" placeholder="Say 'Hello' " rows="1"
+            (keydown)="sendMessage($event)"></textarea>
+            <button nz-button nzType="primary" (click)="sendMessage()"><span nz-icon nzType="send"></span></button>
+      </div>
+   </div>
+</div>

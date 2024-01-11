@@ -1,0 +1,18 @@
+.main-section {
+  position: relative;
+  background: url("../../../assets/images/car-bg.jpg");
+  background-size: cover;
+  padding: 60px 40px;
+  display: flex;
+  justify-content: flex-end;
+  form {
+    width: 300px;
+    border-radius: 8px;
+  }
+}
+.cards {
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}

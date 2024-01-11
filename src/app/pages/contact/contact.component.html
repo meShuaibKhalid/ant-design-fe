@@ -1,0 +1,28 @@
+<div class="wrapper">
+    <h1 class="text-center font-bold mb-5 mt-[50px] text-sky-600 text-2xl">
+        Contact Us
+    </h1>
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="onSubmit()" class="w-50 flex flex-col align-center justify-center">
+        <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your fullname!">
+                <nz-input-group nzPrefixIcon="user">
+                    <input type="text" nz-input formControlName="name" placeholder="Fullname*" />
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your email!">
+                <nz-input-group nzPrefixIcon="mail">
+                    <input type="email" nz-input formControlName="email" placeholder="Email*" />
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control nzErrorTip="This field is required*">
+                <textarea rows="4" nz-input formControlName="message" placeholder="Ask anything*"></textarea>
+            </nz-form-control>
+        </nz-form-item>
+
+        <button nz-button class="register-form-button" [nzType]="'primary'">Send Message</button>
+    </form>
+</div>

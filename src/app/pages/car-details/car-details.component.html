@@ -1,0 +1,161 @@
+<div class="container mx-auto">
+    <!-- Carousel section  Start-->
+    <div class="grid grid-cols-12 bg-gray-100 h-60">
+        <div class="col-span-12 flex justify-center items-center">
+            <nz-carousel [nzEffect]="effect" class="h-100">
+                <div nz-carousel-content *ngFor="let index of array">
+                  <h3>{{ index }}</h3>
+                </div>
+              </nz-carousel>
+        </div>
+    </div>
+    <!-- Carousel section End-->
+    <!-- Detail section start -->
+    <div class="grid md:grid-cols-12 detail-wrap p-3">
+        <div class="sm:col-span-12 md:col-span-6 flex flex-col gap-1">
+            <div class="condition">
+                <h5 nz-typography>Used</h5>
+            </div>
+            <div class="title">
+                <h3 nz-typography>Volkswagen golf (2018)</h3>
+            </div>
+            <div class="disc">
+                <p nz-typography>2.0 R Tsi dsg 5d 380 bhp rear ccamera/ pretoria's maxton kit</p>
+            </div>
+        </div>
+        <!-- section Prices Start -->
+        <div class="wrap-price sm:col-span-12 md:col-span-6 flex flex-col gap-2 mt-10 md:mt-0">
+            <div class="grid grid-cols-12 ">
+                <div class="price col-span-6 flex flex-col gap-2">
+                    <h4 nz-typography>$23,996</h4>
+                    <!-- <p nz-typography>$999 above market average <span class="ml-2" nz-icon nzType="info-circle"
+                            nzTheme="outline"></span></p> -->
+                </div>
+                <!-- Meter img here -->
+                <!-- <div class="col-span-6 flex justify-end">
+                    i
+                </div> -->
+            </div>
+            <div class="grid grid-cols-12 wrap-car-price">
+                <div class="col-span-6">
+                    <h5 nz-typography>Car Price</h5>
+                </div>
+                <div class="col-span-6 flex justify-end">
+                    <h5>$23,996</h5>
+                </div>
+            </div>
+            <div class="grid grid-cols-12 wrap-seller-fee">
+                <div class="col-span-6">
+                    <h5 nz-typography>Seller's admin fee <span class="ml-2" nz-icon nzType="info-circle"
+                            nzTheme="outline"></span>
+                    </h5>
+                </div>
+                <div class="col-span-6 flex justify-end">
+                    <h5 nz-typography> No fees</h5>
+                </div>
+            </div>
+            <hr>
+            <div class="grid grid-cols-12 wrap-Tprice">
+                <div class="col-span-6">
+                    <h5 nz-typography> Total Price </h5>
+                </div>
+                <div class="col-span-6 flex justify-end ">
+                    <h5 class="price" nz-typography>$23,995</h5>
+                </div>
+            </div>
+            <!-- <div class="grid grid-cols-12 wrap-Mprice">
+                <div class="col-span-6">
+                    <h5 nz-typography> Monthy price (HP) </h5>
+                </div>
+                <div class="col-span-6 flex justify-end ">
+                    <h5 class="m-price" nz-typography>$225 <span class="ml-1" nz-icon nzType="arrow-right"
+                            nzTheme="outline"></span></h5>
+                </div>
+            </div> -->
+            <hr class="md:hidden">
+        </div>
+        <!-- section Prices End -->
+    </div>
+    <!--Detail section End-->
+    <!--Overview section Start-->
+    <div class="overview-container grid md:grid-cols-12 flex flex-col gap-2 p-3">
+        <div class="col-span-12 flex flex-col gap-2">
+            <div class="heading">
+                <h2 nz-typography>Overiew</h2>
+            </div>
+            <!-- <div class="disc ">
+                <p nz-typography>Hass perf stage 1</p>
+            </div>
+            <div class="wrap-feature">
+                <h5 class="text-feature" nz-typography>Extra feature <span class="ml-4" nz-icon nzType="arrow-right"
+                        nzTheme="outline"></span></h5>
+            </div> -->
+        </div>
+        <!-- Feature section Start-->
+        <div class="col-span-12">
+        <div class="grid md:grid-cols-12 flex flex-col gap-4 ">
+            <!-- Miles section Start-->
+            <!-- <div class="container-miles sm:col-span-12 md:col-span-6 flex gap-2 ">
+               <div class="icon"><span nz-icon nzType="dashboard" nzTheme="fill"></span></div>
+               <div class="wrap-miles flex flex-col gap-1 ">
+               <p class="text-miles" nz-typography>74,000 miles</p>
+               <p nz-typography>5,571 above miles average <span class="ml-2" nz-icon nzType="info-circle"
+                nzTheme="outline"></span></p>
+               </div>
+            </div> -->
+            <!-- Miles section End-->
+            <!-- detail-features section Start-->
+            <div class="icons-container sm:col-span-12 md:col-span-6 flex flex-col gap-2">
+                <!-- feature 1 -->
+                <div class="grid grid-cols-12 ">
+                    <div class="col-span-6 flex gap-2 items-center">
+                        <div class="icon"><span nz-icon nzType="car" nzTheme="outline"></span></div>
+                        <h5 class="text-features" nz-typography>Hatchback</h5>
+                    </div>
+                    <div class="col-span-6 flex gap-2 items-center">
+                        <div class="icon"><span nz-icon nzType="apartment" nzTheme="outline"></span></div>
+                        <h5 class="text-features" nz-typography>2L</h5>
+                    </div>
+                </div>
+                   <!-- feature 2 -->
+                   <div class="grid grid-cols-12 ">
+                    <div class="col-span-6 flex gap-2 items-center">
+                        <div class="icon"><span nz-icon nzType="deployment-unit" nzTheme="outline"></span></div>
+                        <h5 class="text-features" nz-typography>Automatic</h5>
+                    </div>
+                    <div class="col-span-6 flex gap-2 items-center">
+                        <div class="icon"><span nz-icon nzType="insert-row-right" nzTheme="outline"></span></div>
+                        <h5 class="text-features" nz-typography>Petrol</h5>
+                    </div>
+                </div>
+                    <!-- feature 3 -->
+                    <div class="grid grid-cols-12 ">
+                        <div class="col-span-6 flex gap-2 items-center">
+                            <div class="icon"><span nz-icon nzType="dingding" nzTheme="outline"></span></div>
+                            <h5 class="text-features" nz-typography>5 Doors</h5>
+                        </div>
+                        <div class="col-span-6 flex gap-2 items-center">
+                            <div class="icon"><span nz-icon nzType="border-horizontal" nzTheme="outline"></span></div>
+                            <h5 class="text-features" nz-typography>5 seats</h5>
+                        </div>
+                    </div>
+                        <!-- feature 2 -->
+                   <div class="grid grid-cols-12 ">
+                    <div class="col-span-6 flex gap-2 items-center">
+                        <div class="icon"><span nz-icon nzType="container" nzTheme="outline"></span></div>
+                        <h5 class="text-features" nz-typography>Service history</h5>
+                    </div>
+                    <!-- <div class="col-span-6 flex gap-2 items-center">
+                        <div class="icon"><span nz-icon nzType="dashboard" nzTheme="fill"></span></div>
+                        <h5 class="text-features" nz-typography>2L</h5>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+            <!-- detail-features section End-->
+        </div>
+        <!-- Feature section End-->
+    </div>
+    <!--Overview section End-->
+    <!-- button section -->
+</div>

@@ -1,0 +1,48 @@
+<!-- <header class="text-gray-600 body-font" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
+  <div class="container mx-auto flex flex-wrap justify-between p-5 flex-col md:flex-row items-center">
+    <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+      <span class="ml-3 text-xl">AR CARZONE</span>
+    </a>
+    <button nz-button nzType="default" routerLink="/register">
+      Register
+    </button>
+  </div>
+</header> -->
+<div class="flex align-center justify-center w-full ">
+  <form nz-form [formGroup]="validateForm" class="login-form w-full flex flex-col align-center justify-center"
+    (ngSubmit)="submitForm()">
+    <h1 class="text-center font-bold mb-3 mt-[40px] text-sky-600 text-xl">
+      Login
+    </h1>
+    <p class="mb-3">
+      Already a user? Sign in below
+    </p>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your email!">
+        <nz-input-group nzPrefixIcon="user">
+          <input type="email" nz-input formControlName="email" placeholder="Email" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your Password!">
+        <nz-input-group nzPrefixIcon="lock">
+          <input type="password" nz-input formControlName="password" placeholder="Password" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <div nz-row class="login-form-margin">
+      <div nz-col [nzSpan]="12">
+        <label nz-checkbox formControlName="remember">
+          <span>Remember me</span>
+        </label>
+      </div>
+      <div nz-col [nzSpan]="12">
+        <a class="login-form-forgot">Forgot password</a>
+      </div>
+    </div>
+    <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
+    <span>Don't have an account? Sign up using the link below!</span>
+    <a routerLink="/register" class="text-center text-sky-700">Register</a>
+  </form>
+</div>
