@@ -32,7 +32,7 @@
 </div>
 
 
-<nz-modal [(nzVisible)]="isVisible" nzTitle="{{userID ? 'Update user' : 'Add new user'}}" [nzFooter]="modalFooter"
+<nz-modal [(nzVisible)]="isVisible" nzTitle="{{isEdit ? 'Update user' : 'Add new user'}}" [nzFooter]="modalFooter"
     (nzOnCancel)="handleCancel()">
     <ng-container *nzModalContent>
         <form nz-form [formGroup]="validateForm" class="register-form w-full flex flex-col align-center justify-center">
@@ -58,7 +58,7 @@
                     </nz-input-group>
                 </nz-form-control>
             </nz-form-item>
-            <nz-form-item *ngIf="!userID">
+            <nz-form-item *ngIf="!isEdit">
                 <nz-form-control nzErrorTip="Please input your Password!">
                     <nz-input-group nzPrefixIcon="lock">
                         <input type="password" nz-input formControlName="password" placeholder="Password" />
@@ -70,6 +70,6 @@
 
     <ng-template #modalFooter>
         <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
-        <button nz-button nzType="primary" [disabled]="validateForm.invalid" (click)="handleOk()">{{userID? 'Update' : 'Add'}}</button>
+        <button nz-button nzType="primary" [disabled]="validateForm.invalid" (click)="handleOk()">{{isEdit? 'Update' : 'Add'}}</button>
     </ng-template>
 </nz-modal>

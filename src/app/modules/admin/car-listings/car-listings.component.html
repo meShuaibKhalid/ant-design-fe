@@ -26,9 +26,8 @@
                 <td>{{car?.doors}}/{{car?.color}}</td>
                 <td>{{car?.fuelType}}</td>
                 <td>
-                    <a nz-icon nzType="eye"></a>
-                    <a>Edit</a> |
-                    <a nz-popconfirm nzPopconfirmTitle="Sure to delete?">Delete</a>
+                    <a (click)="editRow(car)">Edit</a> |
+                    <a nz-popconfirm (nzOnConfirm)="deleteRow(car?._id)" nzPopconfirmTitle="Sure to delete?">Delete</a>
                 </td>
             </tr>
         </tbody>
@@ -37,152 +36,165 @@
 </div>
 
 <nz-modal [(nzVisible)]="isVisible" nzTitle="{{isEdit ? 'Update car' : 'Add new car'}}" [nzFooter]="modalFooter"
-    (nzOnCancel)="handleCancel()">
+    (nzOnCancel)="handleCancel()" nzWidth="1200" [nzStyle]="{ top: '20px' }">
     <ng-container *nzModalContent>
-        <form nz-form [formGroup]="validateForm" class="register-form w-full flex flex-col align-center justify-center">
-
-            <nz-form-item>
-                <nz-form-control nzErrorTip="Please input model">
-                    <nz-input-group>
-                        <input type="text" nz-input formControlName="model" placeholder="Model" />
-                    </nz-input-group>
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-control nzErrorTip="Please input description">
-                    <nz-input-group>
-                        <input type="text" nz-input formControlName="description" placeholder="Description" />
-                    </nz-input-group>
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-control nzErrorTip="Please input year">
-                    <nz-input-group>
-                        <input type="number" nz-input formControlName="year" placeholder="Year" />
-                    </nz-input-group>
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-control nzErrorTip="Please input mileage">
-                    <nz-input-group>
-                        <input type="number" nz-input formControlName="mileage" placeholder="Mileage" />
-                    </nz-input-group>
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-control nzErrorTip="Please input price">
-                    <nz-input-group>
-                        <input type="number" nz-input formControlName="price" placeholder="Price" />
-                    </nz-input-group>
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-control nzErrorTip="Please select sale">
-                    <nz-input-group>
-                        <nz-select formControlName="lucy" nzAllowClear nzPlaceHolder="On Sale">
-                            <nz-option nzValue="true" nzLabel="Yes"></nz-option>
-                            <nz-option nzValue="false" nzLabel="No"></nz-option>
+        <form nz-form [formGroup]="validateForm"
+            class="register-form w-full flex flex-col align-center justify-center grid gap-4">
+            <div class="col-span-2">
+                <div class="clearfix">
+                    <nz-upload
+                      nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                      nzListType="picture-card"
+                      [(nzFileList)]="fileList"
+                      [nzShowButton]="fileList.length < 8"
+                      [nzPreview]="handlePreview"
+                      nzMultiple="true"
+                    >
+                      <div>
+                        <span nz-icon nzType="plus"></span>
+                        <div style="margin-top: 8px">Upload</div>
+                      </div>
+                    </nz-upload>
+                    <nz-modal
+                      [nzVisible]="previewVisible"
+                      [nzContent]="modalContent"
+                      [nzFooter]="null"
+                      (nzOnCancel)="previewVisible = false"
+                    >
+                      <ng-template #modalContent>
+                        <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+                      </ng-template>
+                    </nz-modal>
+                  </div>
+            </div>
+            <div class="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-4 ">
+                <nz-form-item class="w-full">
+                    <nz-form-control nzErrorTip="Please input model">
+                        <nz-input-group>
+                            <input type="text" nz-input formControlName="model" placeholder="Model" />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item class="w-full">
+                    <nz-form-control nzErrorTip="Please input year">
+                        <nz-input-group>
+                            <input type="number" nz-input formControlName="year" placeholder="Year" />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item class="w-full">
+                    <nz-form-control nzErrorTip="Please input mileage">
+                        <nz-input-group>
+                            <input type="number" nz-input formControlName="mileage" placeholder="Mileage" />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item class="w-full">
+                    <nz-form-control nzErrorTip="Please input price">
+                        <nz-input-group>
+                            <input type="number" nz-input formControlName="price" placeholder="Price" />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item class="w-full">
+                    <nz-form-control nzErrorTip="Please select sale">
+                        <nz-input-group>
+                            <nz-select formControlName="sale" nzAllowClear nzPlaceHolder="On Sale">
+                                <nz-option nzValue="true" nzLabel="Yes"></nz-option>
+                                <nz-option nzValue="false" nzLabel="No"></nz-option>
+                            </nz-select>
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item class="w-full">
+                    <nz-form-control nzErrorTip="Please select transmission">
+                        <nz-input-group>
+                            <nz-select formControlName="transmission" nzAllowClear nzPlaceHolder="Choose Transmission">
+                                <nz-option nzValue="automatic" nzLabel="Automatic"></nz-option>
+                                <nz-option nzValue="manual" nzLabel="Manual"></nz-option>
+                            </nz-select>
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item class="w-full">
+                    <nz-form-control nzErrorTip="Please select number of doors">
+                        <nz-input-group>
+                            <nz-select formControlName="doors" nzAllowClear nzPlaceHolder="No. of doors">
+                                <nz-option nzValue="1" nzLabel="1"></nz-option>
+                                <nz-option nzValue="2" nzLabel="2"></nz-option>
+                                <nz-option nzValue="3" nzLabel="3"></nz-option>
+                                <nz-option nzValue="4" nzLabel="4"></nz-option>
+                                <nz-option nzValue="5" nzLabel="5"></nz-option>
+                            </nz-select>
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item class="w-full">
+                    <nz-form-control nzErrorTip="Please select Fuel Type">
+                        <nz-select formControlName="fuelType" nzAllowClear nzPlaceHolder="Fuel Type">
+                            <nz-option nzValue="Electric" nzLabel="Electric"></nz-option>
+                            <nz-option nzValue="Gas" nzLabel="Gas"></nz-option>
+                            <nz-option nzValue="Diesel" nzLabel="Diesel"></nz-option>
                         </nz-select>
-                    </nz-input-group>
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-control nzErrorTip="Please select transmission">
-                    <nz-input-group>
-                        <nz-select formControlName="transmission" nzAllowClear nzPlaceHolder="Choose Transmission">
-                            <nz-option nzValue="automatic" nzLabel="Automatic"></nz-option>
-                            <nz-option nzValue="manual" nzLabel="Manual"></nz-option>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item class="w-full">
+                    <nz-form-control nzErrorTip="Please select seats">
+                        <nz-input-group>
+                            <nz-select formControlName="seats" nzAllowClear nzPlaceHolder="No. of seats">
+                                <nz-option nzValue="1" nzLabel="1"></nz-option>
+                                <nz-option nzValue="2" nzLabel="2"></nz-option>
+                                <nz-option nzValue="3" nzLabel="3"></nz-option>
+                                <nz-option nzValue="4" nzLabel="4"></nz-option>
+                                <nz-option nzValue="5" nzLabel="5"></nz-option>
+                                <nz-option nzValue="6" nzLabel="6"></nz-option>
+                                <nz-option nzValue="7" nzLabel="7"></nz-option>
+                                <nz-option nzValue="8" nzLabel="8"></nz-option>
+                                <nz-option nzValue="9" nzLabel="9"></nz-option>
+                                <nz-option nzValue="10" nzLabel="10"></nz-option>
+                            </nz-select>
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item class="w-full">
+                    <nz-form-control nzErrorTip="Please input engine">
+                        <nz-input-group>
+                            <input type="text" nz-input formControlName="engine" placeholder="Engine" />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item class="w-full">
+                    <nz-form-control nzErrorTip="Please input color">
+                        <nz-input-group>
+                            <input type="text" nz-input formControlName="color" placeholder="Color" />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item class="w-full">
+                    <nz-form-control nzErrorTip="Please select condition">
+                        <nz-select formControlName="condition" nzAllowClear nzPlaceHolder="Condition (Used/new)">
+                            <nz-option nzValue="Used" nzLabel="Used"></nz-option>
+                            <nz-option nzValue="New" nzLabel="New"></nz-option>
                         </nz-select>
-                    </nz-input-group>
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-control nzErrorTip="Please input car door">
-                    <nz-input-group>
-                        <input type="number" nz-input formControlName="doors" placeholder="Door" />
-                    </nz-input-group>
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-control nzErrorTip="Please input fuelType">
-                    <nz-input-group>
-                        <input type="text" nz-input formControlName="fuelType" placeholder="FuelType" />
-                    </nz-input-group>
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-control nzErrorTip="Please input seats">
-                    <nz-input-group>
-                        <input type="number" nz-input formControlName="seats" placeholder="Seats" />
-                    </nz-input-group>
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-control nzErrorTip="Please input engine">
-                    <nz-input-group>
-                        <input type="text" nz-input formControlName="engine" placeholder="Engine" />
-                    </nz-input-group>
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-control nzErrorTip="Please input color">
-                    <nz-input-group>
-                        <input type="text" nz-input formControlName="color" placeholder="Color" />
-                    </nz-input-group>
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-control nzErrorTip="Please input condition">
-                    <nz-input-group>
-                        <input type="text" nz-input formControlName="condition" placeholder="Condition" />
-                    </nz-input-group>
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-control nzErrorTip="Please input car features">
-                    <nz-select [nzMaxTagCount]="3" [nzMaxTagPlaceholder]="tagPlaceHolder" nzMode="multiple"
-                        nzPlaceHolder="Please select" formControlName="listOfSelectedValue">
-                        <nz-option nzValue="true" nzLabel="Yes"></nz-option>
-                        <nz-option nzValue="false" nzLabel="No"></nz-option>
-                        <nz-option nzValue="true" nzLabel="Yes"></nz-option>
-                        <nz-option nzValue="false" nzLabel="No"></nz-option>
-                        <nz-option nzValue="true" nzLabel="Yes"></nz-option>
-                        <nz-option nzValue="false" nzLabel="No"></nz-option>
-                    </nz-select>
-                    <ng-template #tagPlaceHolder let-selectedList>and {{ selectedList.length }} more
-                        selected</ng-template>
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-control nzErrorTip="Please input safetyFeatures">
-                    <nz-input-group>
-                        <input type="text" nz-input formControlName="safetyFeatures" placeholder="SafetyFeatures" />
-                    </nz-input-group>
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-control nzErrorTip="Please input entertainmentFeatures">
-                    <nz-input-group>
-                        <input type="text" nz-input formControlName="entertainmentFeatures"
-                            placeholder="EntertainmentFeatures" />
-                    </nz-input-group>
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-control nzErrorTip="Please input exteriorFeatures">
-                    <nz-input-group>
-                        <input type="text" nz-input formControlName="exteriorFeatures" placeholder="ExteriorFeatures" />
-                    </nz-input-group>
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-control nzErrorTip="Please input interiorFeatures">
-                    <nz-input-group>
-                        <input type="text" nz-input formControlName="interiorFeatures" placeholder="InteriorFeatures" />
-                    </nz-input-group>
-                </nz-form-control>
-            </nz-form-item>
-
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item class="w-full">
+                    <nz-form-control nzErrorTip="Please input car features">
+                        <nz-select [nzMaxTagCount]="2" nzMode="multiple" [nzMaxTagPlaceholder]="tagPlaceHolder"
+                            nzPlaceHolder="Please select Features" formControlName="features">
+                            <nz-option *ngFor="let item of features" [nzLabel]="item" [nzValue]="item"></nz-option>
+                        </nz-select>
+                        <ng-template #tagPlaceHolder let-selectedList>and {{ selectedList.length }} more
+                            selected</ng-template>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item class="md:col-span-3 sm:col-span-1">
+                    <nz-form-control nzErrorTip="Please input description">
+                        <textarea rows="4" nz-input formControlName="description"
+                            placeHolder="Enter car description"></textarea>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
         </form>
     </ng-container>
 

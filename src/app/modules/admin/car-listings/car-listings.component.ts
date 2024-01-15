@@ -1,7 +1,17 @@
 import { Component } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { ApiService } from '../../../shared/services/api.service';
-import { UnsubscriptionComponent } from '../../../shared/components/unsubscription/unsubscription.component';
+import { Subject, takeUntil } from 'rxjs';
+import { CAR_FEATURES } from '../../../shared/constants';
+import { NzUploadFile } from 'ng-zorro-antd/upload';
+
+const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
 
 export interface CarI {
   _id?: string;
@@ -30,22 +40,35 @@ export interface CarI {
   templateUrl: './car-listings.component.html',
   styleUrl: './car-listings.component.scss',
 })
-export class CarListingsComponent extends UnsubscriptionComponent {
+export class CarListingsComponent {
   cars: CarI[] = [];
   isVisible = false;
   editId!: string;
   isEdit = false;
   validateForm!: FormGroup;
+  features: string[] = [];
+  ngDestroy$ = new Subject<void>();
 
   constructor(
     private fb: NonNullableFormBuilder,
     private apiService: ApiService
-  ) {
-    super();
-  }
+  ) {}
+  fileList: NzUploadFile[] = [];
+  previewImage: string | undefined = '';
+  previewVisible = false;
+
+  handlePreview = async (file: NzUploadFile): Promise<void> => {
+    if (!file.url && !file['preview']) {
+      file['preview'] = await getBase64(file.originFileObj!);
+    }
+    this.previewImage = file.url || file['preview'];
+    this.previewVisible = true;
+  };
 
   ngOnInit(): void {
     this.initForm();
+    this.getCars();
+    this.features = CAR_FEATURES;
   }
 
   initForm() {
@@ -64,11 +87,7 @@ export class CarListingsComponent extends UnsubscriptionComponent {
       engine: ['', [Validators.required]],
       color: ['', [Validators.required]],
       condition: ['', [Validators.required]],
-      features: ['', [Validators.required]],
-      safetyFeatures: ['', [Validators.required]],
-      entertainmentFeatures: ['', [Validators.required]],
-      exteriorFeatures: ['', [Validators.required]],
-      interiorFeatures: ['', [Validators.required]],
+      features: [[''], [Validators.required]],
     });
   }
 
@@ -77,11 +96,12 @@ export class CarListingsComponent extends UnsubscriptionComponent {
   }
 
   getCars() {
-    this.addSubscription(
-      this.apiService.getallCars().subscribe((cars: any) => {
+    this.apiService
+      .getallCars()
+      .pipe(takeUntil(this.ngDestroy$))
+      .subscribe((cars: any) => {
         this.cars = cars;
-      })
-    );
+      });
   }
 
   handleCancel(): void {
@@ -93,10 +113,45 @@ export class CarListingsComponent extends UnsubscriptionComponent {
   }
 
   handleOk(): void {
-    this.apiService.addCarData(this.validateForm.value).subscribe(() => {
-      this.getCars();
-    });
+    if (this.isEdit) {
+      this.apiService
+        .updateCarData(this.validateForm.value, this.editId)
+        .pipe(takeUntil(this.ngDestroy$))
+        .subscribe(() => {
+          this.getCars();
+        });
+    } else {
+      console.log('form values:', this.validateForm.value);
+      // this.apiService
+      //   .addCarData(this.validateForm.value)
+      //   .pipe(takeUntil(this.ngDestroy$))
+      //   .subscribe(() => {
+      //     this.getCars();
+      //   });
+    }
     this.isVisible = false;
     this.isEdit = false;
+  }
+
+  deleteRow(id?: string) {
+    this.apiService
+      .deleteCarData(id!)
+      .pipe(takeUntil(this.ngDestroy$))
+      .subscribe(() => {
+        this.getCars();
+      });
+  }
+
+  editRow(data: any) {
+    this.editId = data._id;
+    this.isEdit = true;
+    this.validateForm.patchValue(data);
+    this.validateForm.updateValueAndValidity();
+    this.showModal();
+  }
+
+  ngOnDestroy(): void {
+    this.ngDestroy$.next();
+    this.ngDestroy$.complete();
   }
 }

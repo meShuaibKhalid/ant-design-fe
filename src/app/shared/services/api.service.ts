@@ -2,12 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../../modules/admin/user-list/user-list.component';
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ApiService {
   private baseUrl: string = 'http://localhost:3001/api/v1';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   registerUser(body: any) {
     return this.http.post(`${this.baseUrl}/users`, body);
@@ -20,7 +20,6 @@ export class ApiService {
   userList() {
     return this.http.get(`${this.baseUrl}/users`);
   }
-
   updateUser(body: any, id: string) {
     return this.http.patch(`${this.baseUrl}/users/` + id, body);
   }
