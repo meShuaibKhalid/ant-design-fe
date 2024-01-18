@@ -1,49 +1,77 @@
-<div class="container mx-auto flex items-center justify-around px-4 py-2  w-full">
-    <div class="cursor-pointer" routerLink="/home">
-        <img src="assets/images/logo.png" width="70" height="70" alt="">
+<div
+  class="container mx-auto flex items-center justify-around px-4 py-2 w-full"
+  [class.admin]="isAdmin"
+>
+  <div class="cursor-pointer" routerLink="/home" *ngIf="!isAdmin">
+    <img src="assets/images/logo.png" width="70" height="70" alt="" />
+  </div>
+  <form
+    nz-form
+    [formGroup]="validateForm"
+    (ngSubmit)="onSearch()"
+    class="flex items-center gap-2"
+    *ngIf="!isAdmin"
+  >
+    <nz-form-item class="mb-0">
+      <nz-form-control>
+        <nz-input-group nzPrefixIcon="search">
+          <input
+            type="search"
+            nz-input
+            formControlName="search"
+            placeholder="Search"
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="mb-0">
+      <button nz-button nzType="primary">
+        <span nz-icon nzType="search"></span>
+      </button>
+    </nz-form-item>
+  </form>
+  <div class="quick_links flex items-center">
+    <ul class="flex items-center gap-2 mx-4">
+        <li class="flex items-center" *ngIf="isAdmin">
+            <a class="font-medium" routerLink="/dashboard">Switch to Admin</a>
+          </li>
+      <li class="flex items-center">
+        <a class="font-medium" routerLink="/home">Cars</a>
+      </li>
+      <li class="flex items-center">
+        <a class="font-medium" routerLink="/cars" [queryParams]="{ used: true }"
+          >Used Cars</a
+        >
+      </li>
+      <li class="flex items-center">
+        <a class="font-medium" routerLink="/contact">Contact</a>
+      </li>
+      <li class="flex items-center">
+        <a class="font-medium" routerLink="/chat">ChatUI</a>
+      </li>
+      <li class="flex items-center" *ngIf="!user?.name">
+        <a class="font-medium" routerLink="/login">Login</a>
+      </li>
+      <li class="flex items-center" *ngIf="!user?.name">
+        <a class="font-medium" routerLink="/register">Register</a>
+      </li>
+    </ul>
+    <div
+      *ngIf="!isAdmin"
+      class="flex items-center gap-2 ml-3 cursor-pointer"
+      nz-dropdown
+      [nzDropdownMenu]="menu"
+    >
+      <a class="font-semibold">{{ user?.name }}</a>
+      <button nz-button nzShape="circle">
+        <span nz-icon nzType="user"></span>
+      </button>
     </div>
-    <form nz-form [formGroup]="validateForm" (ngSubmit)="onSearch()" class="flex items-center gap-2">
-        <nz-form-item class="mb-0">
-            <nz-form-control nzErrorTip="Please input your email!">
-                <nz-input-group nzPrefixIcon="search">
-                    <input type="search" nz-input formControlName="search" placeholder="Search" />
-                </nz-input-group>
-            </nz-form-control>
-        </nz-form-item>
-        <nz-form-item class="mb-0">
-            <button nz-button nzType="primary"><span nz-icon nzType="search"></span></button>
-        </nz-form-item>
-    </form>
-    <div class="quick_links flex items-center">
-        <ul class="flex items-center gap-2 mx-4">
-            <li class="flex items-center">
-                <a class="font-medium" routerLink="/home">Cars</a>
-            </li>
-            <li class="flex items-center">
-                <a class="font-medium">Used Cars</a>
-            </li>
-            <li class="flex items-center">
-                <a class="font-medium" routerLink="/contact">Contact</a>
-            </li>
-            <li class="flex items-center">
-                <a class="font-medium" routerLink="/chat">ChatUI</a>
-            </li>
-            <li class="flex items-center" *ngIf="!user?.name">
-                <a class="font-medium" routerLink="/login">Login</a>
-            </li>
-            <li class="flex items-center" *ngIf="!user?.name">
-                <a class="font-medium" routerLink="/register">Register</a>
-            </li>
-        </ul>
-        <div class="flex items-center gap-2 ml-3 cursor-pointer" nz-dropdown [nzDropdownMenu]="menu">
-            <a class="font-semibold">{{user?.name}}</a>
-            <button nz-button nzShape="circle"><span nz-icon nzType="user"></span></button>
-        </div>
-    </div>
+  </div>
 </div>
 <nz-dropdown-menu #menu="nzDropdownMenu">
-    <ul nz-menu nzSelectable>
-        <li nz-menu-item>Profile</li>
-        <li nz-menu-item (click)="logout()">Logout</li>
-    </ul>
+  <ul nz-menu nzSelectable>
+    <li nz-menu-item routerLink="/profile">Profile</li>
+    <li nz-menu-item (click)="logout()">Logout</li>
+  </ul>
 </nz-dropdown-menu>

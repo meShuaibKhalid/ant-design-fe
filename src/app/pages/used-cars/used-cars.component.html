@@ -1,0 +1,64 @@
+<div class="container mx-auto">
+  <h1 class="text-3xl font-semibold py-[30px]">Explore {{ title }}</h1>
+  <div class="cards">
+    <ng-container *ngFor="let car of cars">
+      <a
+        class="block rounded-lg p-4 shadow-sm shadow-indigo-100"
+        [routerLink]="['/car-details', car._id]"
+      >
+        @if (car?.sale) {
+        <nz-ribbon nzText="On Sale" class="sale-ribbon"> </nz-ribbon>
+        }
+        <img
+          alt="Home"
+          src="{{ car.images[0] }}"
+          class="h-56 w-full rounded-md object-cover"
+        />
+        <div class="mt-2">
+          <dl>
+            <div>
+              <dd class="text-sm text-gray-500">
+                {{ car.price | currency : "GBP" : "symbol" }}
+              </dd>
+            </div>
+
+            <div>
+              <dd class="font-medium">{{ car.model }} - {{ car.year }}</dd>
+            </div>
+          </dl>
+
+          <div class="mt-6 flex items-center gap-8 text-xs">
+            <div class="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
+              <span nz-icon nzType="car" nzTheme="outline"></span>
+              <div class="mt-1.5 sm:mt-0">
+                <p class="text-gray-500">Transmission</p>
+
+                <p class="font-medium">{{ car.transmission }}</p>
+              </div>
+            </div>
+
+            <div class="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
+              <span nz-icon nzType="bg-colors" nzTheme="outline"></span>
+
+              <div class="mt-1.5 sm:mt-0">
+                <p class="text-gray-500">Color</p>
+
+                <p class="font-medium">{{ car.color }}</p>
+              </div>
+            </div>
+
+            <div class="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
+              <span nz-icon nzType="field-time" nzTheme="outline"></span>
+
+              <div class="mt-1.5 sm:mt-0">
+                <p class="text-gray-500">Year</p>
+
+                <p class="font-medium">{{ car.year }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </ng-container>
+  </div>
+</div>

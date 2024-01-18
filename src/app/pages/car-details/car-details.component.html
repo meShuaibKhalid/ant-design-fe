@@ -1,161 +1,261 @@
-<div class="container mx-auto">
-    <!-- Carousel section  Start-->
-    <div class="grid grid-cols-12 bg-gray-100 h-60">
-        <div class="col-span-12 flex justify-center items-center">
-            <nz-carousel [nzEffect]="effect" class="h-100">
-                <div nz-carousel-content *ngFor="let index of array">
-                  <h3>{{ index }}</h3>
-                </div>
-              </nz-carousel>
+<!-- <div class="w-full px-4 xs:pt-10">
+  <div
+    class="flex flex-col ltablet:flex-row ltablet:items-center lg:flex-row lg:items-center w-full ptablet:text-center">
+    <div class="w-full ltablet:w-2/5 lg:w-2/5">
+      <div class="w-full">
+        <h1 class="
+              font-sans font-light
+              text-5xl
+              ltablet:text-5xl
+              lg:text-5xl
+              leading-none
+              mb-2
+              text-muted-800
+              dark:text-white
+            ">
+          Hyundai Tucson
+        </h1>
+        <p class="
+              font-sans
+              text-lg text-muted-500
+              dark:text-muted-400
+              max-w-lg
+              mx-auto
+            ">
+          Compact hybrid SUV
+        </p>
+        <div class="
+              font-sans
+              text-sm
+              mt-4
+              mb-6
+              max-w-sm
+              ptablet:mx-auto
+              text-muted-500
+              dark:text-muted-400
+            ">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Utram
+            tandem linguam nescio? Vide, quantum, inquam, fallare, Torquate.
+            Dic in quovis.
+          </p>
         </div>
+        <div class="relative w-full max-w-sm ptablet:mx-auto flex">
+          <div class="
+                flex-1 flex
+                items-center
+                px-4
+                group-hover:opacity-0
+                transition-opacity
+                duration-300
+              ">
+            <div class="text-xl">
+              <span class="
+                    block
+                    font-sans font-semibold
+                    text-muted-800
+                    dark:text-muted-50
+                  ">
+                4.4
+                <small class="font-normal text-muted-500 dark:text-muted-400">
+                  s
+                </small>
+              </span>
+              <small class="
+                    block
+                    font-sans
+                    text-sm text-muted-500
+                    dark:text-muted-400
+                  ">
+                0-60mph
+              </small>
+            </div>
+          </div>
+          <div class="
+                flex-1 flex
+                items-center
+                px-4
+                group-hover:opacity-0
+                transition-opacity
+                duration-300
+              ">
+            <div class="text-xl">
+              <span class="
+                    block
+                    font-sans font-semibold
+                    text-muted-800
+                    dark:text-muted-50
+                  ">
+                135
+                <small class="font-normal text-muted-500 dark:text-muted-400">
+                  mph
+                </small>
+              </span>
+              <small class="
+                    block
+                    font-sans
+                    text-sm text-muted-500
+                    dark:text-muted-400
+                  ">
+                Top speed
+              </small>
+            </div>
+          </div>
+          <div class="
+                flex-1 flex
+                items-center
+                px-4
+                group-hover:opacity-0
+                transition-opacity
+                duration-300
+              ">
+            <div class="text-xl">
+              <span class="
+                    block
+                    font-sans font-semibold
+                    text-muted-800
+                    dark:text-muted-50
+                  ">
+                389
+                <small class="font-normal text-muted-500 dark:text-muted-400">
+                  mi
+                </small>
+              </span>
+              <small class="
+                    block
+                    font-sans
+                    text-sm text-muted-500
+                    dark:text-muted-400
+                  ">
+                Autonomy
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="hidden ltablet:grid lg:grid grid-cols-2 mt-6">
+          <div>
+            <ul class="
+                  font-sans
+                  text-xs
+                  space-y-2
+                  text-muted-500
+                  dark:text-muted-400
+                ">
+              <li class="flex items-center gap-2">
+                <span>Midnight Silver Metallic Paint</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <span>20’’ Überturbine Wheels</span>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <ul class="
+                  font-sans
+                  text-xs
+                  space-y-2
+                  text-muted-500
+                  dark:text-muted-400
+                ">
+              <li class="flex items-center gap-2">
+                <span>Performance Upgrade</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <span>Carbon Fiber Spoiler</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- Carousel section End-->
-    <!-- Detail section start -->
-    <div class="grid md:grid-cols-12 detail-wrap p-3">
-        <div class="sm:col-span-12 md:col-span-6 flex flex-col gap-1">
-            <div class="condition">
-                <h5 nz-typography>Used</h5>
-            </div>
-            <div class="title">
-                <h3 nz-typography>Volkswagen golf (2018)</h3>
-            </div>
-            <div class="disc">
-                <p nz-typography>2.0 R Tsi dsg 5d 380 bhp rear ccamera/ pretoria's maxton kit</p>
-            </div>
-        </div>
-        <!-- section Prices Start -->
-        <div class="wrap-price sm:col-span-12 md:col-span-6 flex flex-col gap-2 mt-10 md:mt-0">
-            <div class="grid grid-cols-12 ">
-                <div class="price col-span-6 flex flex-col gap-2">
-                    <h4 nz-typography>$23,996</h4>
-                    <!-- <p nz-typography>$999 above market average <span class="ml-2" nz-icon nzType="info-circle"
-                            nzTheme="outline"></span></p> -->
-                </div>
-                <!-- Meter img here -->
-                <!-- <div class="col-span-6 flex justify-end">
-                    i
-                </div> -->
-            </div>
-            <div class="grid grid-cols-12 wrap-car-price">
-                <div class="col-span-6">
-                    <h5 nz-typography>Car Price</h5>
-                </div>
-                <div class="col-span-6 flex justify-end">
-                    <h5>$23,996</h5>
-                </div>
-            </div>
-            <div class="grid grid-cols-12 wrap-seller-fee">
-                <div class="col-span-6">
-                    <h5 nz-typography>Seller's admin fee <span class="ml-2" nz-icon nzType="info-circle"
-                            nzTheme="outline"></span>
-                    </h5>
-                </div>
-                <div class="col-span-6 flex justify-end">
-                    <h5 nz-typography> No fees</h5>
-                </div>
-            </div>
-            <hr>
-            <div class="grid grid-cols-12 wrap-Tprice">
-                <div class="col-span-6">
-                    <h5 nz-typography> Total Price </h5>
-                </div>
-                <div class="col-span-6 flex justify-end ">
-                    <h5 class="price" nz-typography>$23,995</h5>
-                </div>
-            </div>
-            <!-- <div class="grid grid-cols-12 wrap-Mprice">
-                <div class="col-span-6">
-                    <h5 nz-typography> Monthy price (HP) </h5>
-                </div>
-                <div class="col-span-6 flex justify-end ">
-                    <h5 class="m-price" nz-typography>$225 <span class="ml-1" nz-icon nzType="arrow-right"
-                            nzTheme="outline"></span></h5>
-                </div>
-            </div> -->
-            <hr class="md:hidden">
-        </div>
-        <!-- section Prices End -->
+    <div class="w-full ltablet:w-3/5 lg:w-3/5">
+      <img class="block w-full max-w-xl ltablet:max-w-3xl lg:max-w-3xl mx-auto ptablet:mt-8"
+        src="https://placehold.co/400x400" alt="Vehicle image">
     </div>
-    <!--Detail section End-->
-    <!--Overview section Start-->
-    <div class="overview-container grid md:grid-cols-12 flex flex-col gap-2 p-3">
-        <div class="col-span-12 flex flex-col gap-2">
-            <div class="heading">
-                <h2 nz-typography>Overiew</h2>
-            </div>
-            <!-- <div class="disc ">
-                <p nz-typography>Hass perf stage 1</p>
-            </div>
-            <div class="wrap-feature">
-                <h5 class="text-feature" nz-typography>Extra feature <span class="ml-4" nz-icon nzType="arrow-right"
-                        nzTheme="outline"></span></h5>
-            </div> -->
+  </div>
+</div> -->
+
+<div [class]="isDashboard ? '' : 'container mx-auto pt-[40px]'">
+  <div class="flex justify-between car-details-wrapper">
+    @if (carDetails?.sale) {
+    <nz-ribbon nzText="On Sale" class="sale-ribbon"> </nz-ribbon>
+    }
+    <div class="flex flex col items-start">
+      <div class="w-full">
+        <h1
+          class="font-sans font-light text-5xl ltablet:text-5xl lg:text-5xl leading-none mb-2 text-muted-800"
+        >
+          {{ carDetails?.model }}
+        </h1>
+        <p class="font-sans text-lg text-muted-500">
+          {{ carDetails?.year }}-
+          <span class="font-semibold">{{
+            carDetails?.price | currency : "GBP" : "symbol"
+          }}</span>
+        </p>
+        <div class="font-sans mt-4 mb-6 ptablet:mx-auto text-muted-500">
+          <p>
+            {{ carDetails?.description }}
+          </p>
         </div>
-        <!-- Feature section Start-->
-        <div class="col-span-12">
-        <div class="grid md:grid-cols-12 flex flex-col gap-4 ">
-            <!-- Miles section Start-->
-            <!-- <div class="container-miles sm:col-span-12 md:col-span-6 flex gap-2 ">
-               <div class="icon"><span nz-icon nzType="dashboard" nzTheme="fill"></span></div>
-               <div class="wrap-miles flex flex-col gap-1 ">
-               <p class="text-miles" nz-typography>74,000 miles</p>
-               <p nz-typography>5,571 above miles average <span class="ml-2" nz-icon nzType="info-circle"
-                nzTheme="outline"></span></p>
-               </div>
-            </div> -->
-            <!-- Miles section End-->
-            <!-- detail-features section Start-->
-            <div class="icons-container sm:col-span-12 md:col-span-6 flex flex-col gap-2">
-                <!-- feature 1 -->
-                <div class="grid grid-cols-12 ">
-                    <div class="col-span-6 flex gap-2 items-center">
-                        <div class="icon"><span nz-icon nzType="car" nzTheme="outline"></span></div>
-                        <h5 class="text-features" nz-typography>Hatchback</h5>
-                    </div>
-                    <div class="col-span-6 flex gap-2 items-center">
-                        <div class="icon"><span nz-icon nzType="apartment" nzTheme="outline"></span></div>
-                        <h5 class="text-features" nz-typography>2L</h5>
-                    </div>
-                </div>
-                   <!-- feature 2 -->
-                   <div class="grid grid-cols-12 ">
-                    <div class="col-span-6 flex gap-2 items-center">
-                        <div class="icon"><span nz-icon nzType="deployment-unit" nzTheme="outline"></span></div>
-                        <h5 class="text-features" nz-typography>Automatic</h5>
-                    </div>
-                    <div class="col-span-6 flex gap-2 items-center">
-                        <div class="icon"><span nz-icon nzType="insert-row-right" nzTheme="outline"></span></div>
-                        <h5 class="text-features" nz-typography>Petrol</h5>
-                    </div>
-                </div>
-                    <!-- feature 3 -->
-                    <div class="grid grid-cols-12 ">
-                        <div class="col-span-6 flex gap-2 items-center">
-                            <div class="icon"><span nz-icon nzType="dingding" nzTheme="outline"></span></div>
-                            <h5 class="text-features" nz-typography>5 Doors</h5>
-                        </div>
-                        <div class="col-span-6 flex gap-2 items-center">
-                            <div class="icon"><span nz-icon nzType="border-horizontal" nzTheme="outline"></span></div>
-                            <h5 class="text-features" nz-typography>5 seats</h5>
-                        </div>
-                    </div>
-                        <!-- feature 2 -->
-                   <div class="grid grid-cols-12 ">
-                    <div class="col-span-6 flex gap-2 items-center">
-                        <div class="icon"><span nz-icon nzType="container" nzTheme="outline"></span></div>
-                        <h5 class="text-features" nz-typography>Service history</h5>
-                    </div>
-                    <!-- <div class="col-span-6 flex gap-2 items-center">
-                        <div class="icon"><span nz-icon nzType="dashboard" nzTheme="fill"></span></div>
-                        <h5 class="text-features" nz-typography>2L</h5>
-                    </div> -->
-                </div>
-            </div>
+
+        <div class="container mx-auto mb-3">
+          <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
+            <h5 class="font-sans font-semibold text-muted-500 mb-4">Engine</h5>
+            <p nz-typography>{{ carDetails?.engine || "" }}</p>
+
+            <h5 class="font-sans font-semibold text-muted-500 mb-4">
+              Transmission
+            </h5>
+            <p nz-typography>{{ carDetails?.transmission || "" }}</p>
+
+            <h5 class="font-sans font-semibold text-muted-500 mb-4">Mileage</h5>
+            <p nz-typography>{{ carDetails?.mileage || "" }}</p>
+
+            <h5 class="font-sans font-semibold text-muted-500 mb-4">
+              Fuel Type
+            </h5>
+            <p nz-typography>{{ carDetails?.fuelType || "" }}</p>
+
+            <h5 class="font-sans font-semibold text-muted-500 mb-4">
+              Condition
+            </h5>
+            <p nz-typography>{{ carDetails?.condition || "" }}</p>
+
+            <h5 class="font-sans font-semibold text-muted-500 mb-4">Color</h5>
+            <p nz-typography>{{ carDetails?.color || "" }}</p>
+
+            <h5 class="font-sans font-semibold text-muted-500 mb-4">Doors</h5>
+            <p nz-typography>{{ carDetails?.doors || "" }}</p>
+
+            <h5 class="font-sans font-semibold text-muted-500 mb-4">Seats</h5>
+            <p nz-typography>{{ carDetails?.seats || "" }}</p>
+          </div>
+
+          <h4 nz-typography>Features</h4>
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+          >
+            @for (item of carDetails?.features; track $index) {
+            @if(item?.length) {
+            <span nz-typography>{{ item }}</span>
+            } }
+          </div>
         </div>
-            <!-- detail-features section End-->
+        <div class="container mx-auto">
+          <div
+            class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+          >
+            @for (item of carDetails?.images; track $index) {
+            <img
+              src="{{ item }}"
+              alt="{{ item }}"
+              class="w-full h-full object-cover"
+            />
+            }
+          </div>
         </div>
-        <!-- Feature section End-->
+      </div>
     </div>
-    <!--Overview section End-->
-    <!-- button section -->
+  </div>
 </div>

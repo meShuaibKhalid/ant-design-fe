@@ -6,6 +6,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { AiChatComponent } from './shared/components/ai-chat/ai-chat.component';
 import { CarDetailsComponent } from './pages/car-details/car-details.component';
+import { UsedCarsComponent } from './pages/used-cars/used-cars.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home' },
@@ -36,6 +38,14 @@ export const routes: Routes = [
   {
     path: 'car-details/:id',
     component: CarDetailsComponent
+  },
+  {
+    path: 'cars',
+    component: UsedCarsComponent
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent
   }
 ];
 

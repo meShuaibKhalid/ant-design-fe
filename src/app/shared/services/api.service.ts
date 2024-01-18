@@ -16,7 +16,10 @@ export class ApiService {
   login(body: any) {
     return this.http.post(`${this.baseUrl}/users/login`, body);
   }
-
+  getUserById(id: string) {
+    return this.http.get(`${this.baseUrl}/users/` + id);
+  }
+  
   userList() {
     return this.http.get(`${this.baseUrl}/users`);
   }
@@ -29,16 +32,28 @@ export class ApiService {
   addCarData(body: any) {
     return this.http.post(`${this.baseUrl}/cars`, body);
   }
-  getallCars() {
-    return this.http.get(`${this.baseUrl}/cars`);
+  getallCars(filters?) {
+    const params = filters ? Object.keys(filters).filter(key => filters[key] != null && encodeURIComponent(filters[key]).length)
+            .map(key => `${key}=${encodeURIComponent(filters[key])}`).join('&') : '';
+    return this.http.get(`${this.baseUrl}/cars?`+ params);
   }
-  getCarById() {
-    return this.http.get(`${this.baseUrl}/cars`);
+  searchCars(filters?) {
+    const params = Object.keys(filters).filter(key => filters[key] != null && encodeURIComponent(filters[key]).length)
+            .map(key => `${key}=${encodeURIComponent(filters[key])}`).join('&');
+    return this.http.get(`${this.baseUrl}/cars/search?`+ params);
+  }
+  getCarById(id) {
+    return this.http.get(`${this.baseUrl}/cars/`+ id);
   }
   updateCarData(body: any, id: string) {
     return this.http.patch(`${this.baseUrl}/cars/` + id, body);
   }
   deleteCarData(id: string) {
     return this.http.delete(`${this.baseUrl}/cars/` + id);
+  }
+  uploadFile(file: File) {
+    const fileData = new FormData();
+    fileData.append("file", file);
+    return this.http.post(`${this.baseUrl}/upload`, fileData);
   }
 }

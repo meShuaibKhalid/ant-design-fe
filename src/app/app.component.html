@@ -1,6 +1,12 @@
 <div class="wrapper">
-    <app-header *ngIf="user?.role != 'admin'"></app-header>
-    <div class="bg-gray-50 h-100 main">
-        <router-outlet></router-outlet>
-    </div>
+  <div class="spinner_overlay" *ngIf="(spinner$ | async)">
+    <nz-spin
+      nzSimple
+      [nzSize]="'large'"
+    ></nz-spin>
+  </div>
+  <app-header [isAdmin]="user?.role === 'admin'"></app-header>
+  <div class="bg-gray-50 h-100 main">
+    <router-outlet></router-outlet>
+  </div>
 </div>

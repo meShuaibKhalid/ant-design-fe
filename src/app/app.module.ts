@@ -8,7 +8,7 @@ import {
   BrowserAnimationsModule,
   provideAnimations,
 } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { provideNzI18n, en_US } from 'ng-zorro-antd/i18n';
 import { provideNzIcons } from './icons-provider';
 import { SharedModule } from './shared/shared.module';
@@ -20,6 +20,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { AiChatComponent } from './shared/components/ai-chat/ai-chat.component';
 import { CarDetailsComponent } from './pages/car-details/car-details.component';
+import { UsedCarsComponent } from './pages/used-cars/used-cars.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { HttpIntecept } from './modules/auth/http.interceptor';
 
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
@@ -37,7 +40,9 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     HeaderComponent,
     ContactComponent,
     AiChatComponent,
-    CarDetailsComponent
+    CarDetailsComponent,
+    UsedCarsComponent,
+    ProfileComponent,
   ],
   providers: [
     provideNzIcons(),
@@ -45,6 +50,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     importProvidersFrom(FormsModule),
     importProvidersFrom(HttpClientModule),
     provideAnimations(),
+    { provide: HTTP_INTERCEPTORS, useClass: HttpIntecept, multi: true },
   ],
   bootstrap: [AppComponent],
   imports: [
@@ -54,5 +60,8 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     SharedModule,
     ReactiveFormsModule,
   ],
+  exports: [
+    HeaderComponent
+  ]
 })
 export class AppModule {}

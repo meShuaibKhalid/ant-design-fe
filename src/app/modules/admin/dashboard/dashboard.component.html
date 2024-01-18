@@ -1,40 +1,60 @@
 <nz-layout class="app-layout">
-    <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
-        [nzTrigger]="null">
-        <div class="sidebar-logo">
-            <h1>AR CARZONE Admin</h1>
-        </div>
-        <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-            <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
-                <ul>
-                    <li nz-menu-item nzMatchRouter nzMatchRouterExact routerLink="/dashboard">
-                        <a>Welcome</a>
-                    </li>
-                    <li nz-menu-item nzMatchRouter routerLink="/dashboard/users">
-                        <a>Users</a>
-                    </li>
-                    <li nz-menu-item nzMatchRouter routerLink="/dashboard/cars">
-                        <a>Cars</a>
-                    </li>
-                </ul>
-            </li>
+  <nz-sider
+    class="menu-sidebar"
+    nzCollapsible
+    nzWidth="256px"
+    nzBreakpoint="md"
+    [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null"
+  >
+    <div class="sidebar-logo">
+      <h1>AR CARZONE Admin</h1>
+    </div>
+    <ul
+      nz-menu
+      nzTheme="dark"
+      nzMode="inline"
+      [nzInlineCollapsed]="isCollapsed"
+    >
+      <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
+        <ul>
+          <li
+            nz-menu-item
+            nzMatchRouter
+            nzMatchRouterExact
+            routerLink="/dashboard"
+          >
+            <a>Welcome</a>
+          </li>
+          <li nz-menu-item nzMatchRouter routerLink="/dashboard/users">
+            <a>Users</a>
+          </li>
+          <li nz-menu-item nzMatchRouter routerLink="/dashboard/cars">
+            <a>Cars</a>
+          </li>
         </ul>
-    </nz-sider>
-    <nz-layout>
-        <nz-header>
-            <div class="app-header">
-                <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-                    <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></span>
-                </span>
-                <button nz-button nzType="default" (click)="logout()" class="mr-3">
-                    Logout
-                </button>
-            </div>
-        </nz-header>
-        <nz-content>
-            <div class="inner-content">
-                <router-outlet></router-outlet>
-            </div>
-        </nz-content>
-    </nz-layout>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <div class="app-header">
+        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+          <span
+            class="trigger"
+            nz-icon
+            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+          ></span>
+        </span>
+        <button nz-button nzType="default" (click)="logout()" class="mr-3">
+          Logout
+        </button>
+      </div>
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
 </nz-layout>

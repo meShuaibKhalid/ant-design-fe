@@ -20,6 +20,10 @@ export class DashboardComponent {
     );
    }
 
+   setView(viewType: string) {
+    localStorage.setItem('viewType', viewType);
+  }
+
   logout() {
     localStorage.clear();
     this.store.reset();

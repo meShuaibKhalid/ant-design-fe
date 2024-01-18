@@ -5,6 +5,7 @@ import {
   NonNullableFormBuilder,
   Validators,
 } from '@angular/forms';
+import { Loader } from '../../shared/services/loader.service';
 
 @Component({
   selector: 'app-contact',
@@ -22,7 +23,7 @@ export class ContactComponent {
     message: ['', Validators.required],
   });
 
-  constructor(private fb: NonNullableFormBuilder) {}
+  constructor(private fb: NonNullableFormBuilder, private loader: Loader) {}
 
   onSubmit() {
     if (this.validateForm.valid) {

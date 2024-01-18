@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Subject, Subscription, takeUntil } from 'rxjs';
+import { Loader } from '../../../shared/services/loader.service';
 
 export interface User {
   _id: string;
@@ -27,8 +28,7 @@ export class UserListComponent {
   isVisible = false;
   editId!: string;
   isEdit = false;
-  public ngDestroy$:Subject<boolean>=new Subject();
-  private httpSubscription$: Subscription[] = new Array<Subscription>();
+  public ngDestroy$: Subject<boolean> = new Subject();
   validateForm: FormGroup<{
     title: FormControl<string>;
     fullname: FormControl<string>;
@@ -43,26 +43,35 @@ export class UserListComponent {
 
   constructor(
     private apiService: ApiService,
-    private fb: NonNullableFormBuilder
-  ) { }
+    private fb: NonNullableFormBuilder,
+    private loader: Loader
+  ) {}
 
   ngOnInit() {
     this.getUsers();
   }
 
   getUsers() {
-   this.apiService.userList().pipe(takeUntil(this.ngDestroy$)).subscribe((users: any) => {
-      console.log('users: ', users);
-      this.users = users;
-    });
+    this.loader.show();
+    this.apiService
+      .userList()
+      .pipe(takeUntil(this.ngDestroy$))
+      .subscribe((users: any) => {
+        this.users = users;
+        this.loader.hide();
+      });
   }
 
   deleteRow(id: string) {
+    this.loader.show();
 
-    console.log('id: ', id);
-    this.apiService.deleteUser(id).pipe(takeUntil(this.ngDestroy$)).subscribe(() => {
-      this.getUsers();
-    });
+    this.apiService
+      .deleteUser(id)
+      .pipe(takeUntil(this.ngDestroy$))
+      .subscribe(() => {
+        this.getUsers();
+        this.loader.hide();
+      });
   }
 
   editRow(user: User) {
@@ -72,7 +81,6 @@ export class UserListComponent {
     this.validateForm.get('password')?.clearValidators();
     this.validateForm.updateValueAndValidity();
     this.showModal();
-
   }
 
   showModal(): void {
@@ -80,18 +88,28 @@ export class UserListComponent {
   }
 
   handleOk(): void {
+    this.loader.show();
     if (this.isEdit) {
-     this.apiService.updateUser(this.validateForm.value, this.editId).pipe(takeUntil(this.ngDestroy$)).subscribe(() => {this.getUsers(); });
-      
-    }
-    else {
-     this.apiService.registerUser(this.validateForm.value).pipe(takeUntil(this.ngDestroy$)).subscribe(() => { this.getUsers(); });
+      this.apiService
+        .updateUser(this.validateForm.value, this.editId)
+        .pipe(takeUntil(this.ngDestroy$))
+        .subscribe(() => {
+          this.loader.hide();
+          this.getUsers();
+        });
+    } else {
+      this.apiService
+        .registerUser(this.validateForm.value)
+        .pipe(takeUntil(this.ngDestroy$))
+        .subscribe(() => {
+          this.loader.hide();
+          this.getUsers();
+        });
     }
     console.log('Button ok clicked!');
     this.isVisible = false;
     this.isEdit = false;
     this.getUsers();
-
   }
 
   handleCancel(): void {
@@ -102,10 +120,8 @@ export class UserListComponent {
     this.isEdit = false;
   }
 
-  ngOnDestroy():void
-  {
+  ngOnDestroy(): void {
     this.ngDestroy$.next(true);
     this.ngDestroy$.complete();
-    
   }
 }
